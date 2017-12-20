@@ -71,5 +71,19 @@ namespace theater.Models
                 i++;
             }
         }
+
+        public Movie DisplayMovies()
+        {
+            string movieSelection;
+            int movieSelectionInt;
+            for (int i = 0; i < Movies.Count; i++)
+            {
+                Console.WriteLine($"Movie {i + 1}:" + Movies[i].Title);
+            }
+            Console.WriteLine("Make a selection to show movie times");
+            movieSelection = Console.ReadLine();
+            int.TryParse(movieSelection, out movieSelectionInt);
+            return Movies[movieSelectionInt - 1];
+        }
     }
 }
