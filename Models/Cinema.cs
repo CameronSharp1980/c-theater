@@ -72,18 +72,31 @@ namespace theater.Models
             }
         }
 
-        public Movie DisplayMovies()
+        public bool DisplayMovies()
         {
             string movieSelection;
             int movieSelectionInt;
-            for (int i = 0; i < Movies.Count; i++)
+
+
+            while (true)
             {
-                Console.WriteLine($"Movie {i + 1}:" + Movies[i].Title);
+                for (int i = 0; i < Movies.Count; i++)
+                {
+                    Console.WriteLine($"Movie {i + 1}:" + Movies[i].Title);
+                }
+                Console.WriteLine("Make a selection to show movie times (Select \"r\" to return to the Cinema selection menu or \"q\" to quit)");
+                movieSelection = Console.ReadLine();
+                if (movieSelection.ToLower() == "r")
+                {
+                    return false;
+                }
+                else if (movieSelection.ToLower() == "q")
+                {
+                    return true;
+                }
+                int.TryParse(movieSelection, out movieSelectionInt);
+                DisplayShowtimes(Movies[movieSelectionInt - 1]);
             }
-            Console.WriteLine("Make a selection to show movie times");
-            movieSelection = Console.ReadLine();
-            int.TryParse(movieSelection, out movieSelectionInt);
-            return Movies[movieSelectionInt - 1];
         }
     }
 }
